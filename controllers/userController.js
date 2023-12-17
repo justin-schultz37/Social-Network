@@ -19,10 +19,10 @@ module.exports = {
     // Get a single user
     async getSingleUser(req, res) {
         try {
-            const user = await User.findOne({ username: req.params.username }).select('-__v');
+            const user = await User.findById(req.params.userId).select('-__v');
 
             if (!user) {
-                return res.status(404).json({ message: 'No user with that username' });
+                return res.status(404).json({ message: 'No user with that userId' });
             }
 
             res.json(user);
@@ -30,6 +30,7 @@ module.exports = {
             handleErrorResponse(res, err);
         }
     },
+
 
     // Create a user
     async createUser(req, res) {
@@ -44,10 +45,10 @@ module.exports = {
     // Delete a user
     async deleteUser(req, res) {
         try {
-            const user = await User.findOneAndDelete({ username: req.params.username });
+            const user = await User.findByIdAndDelete(req.params.userId);
 
             if (!user) {
-                return res.status(404).json({ message: 'No user with that username' });
+                return res.status(404).json({ message: 'No user with that userId' });
             }
 
             // Handle related data or relationships if needed
@@ -58,17 +59,18 @@ module.exports = {
         }
     },
 
+
     // Update a user
     async updateUser(req, res) {
         try {
-            const user = await User.findOneAndUpdate(
-                { username: req.params.username },
+            const user = await User.findByIdAndUpdate(
+                req.params.userId,
                 { $set: req.body },
                 { runValidators: true, new: true }
             );
 
             if (!user) {
-                return res.status(404).json({ message: 'No user with this username!' });
+                return res.status(404).json({ message: 'No user with this userId!' });
             }
 
             res.json(user);

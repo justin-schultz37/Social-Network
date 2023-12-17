@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+// importing CRUD operations from Controllers and assigning them to variables
 const {
     getThoughts,
     getSingleThought,
@@ -10,6 +11,7 @@ const {
     deleteReaction,
 } = require('../../controllers/thoughtController');
 
+// Creating routes and assigning the operations that are tied to the specific route group
 router.route('/')
     .get(getThoughts)
     .post(createThought);
