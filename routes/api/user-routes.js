@@ -20,11 +20,10 @@ router.route('/:userId')
     .get(getSingleUser)
     .put(updateUser)
     .delete(deleteUser);
-// CRUD operations that can be done on the root api/users/userId/friends path
-router.route('/:userId/friends')
+
+// CRUD operations that can be done on the root api/users/userId/friends/:friendId path
+router.route('/:userId/friends/:friendId')
     .post(addFriend)
-// CRUD operations that can be done on the root api/users/userId/friends/friendId path
-router.route('/:userId/friends/friendId')
-    .delete(removeFriend)
+    .delete(removeFriend);
 
 module.exports = router;
