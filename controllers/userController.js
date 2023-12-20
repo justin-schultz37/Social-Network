@@ -1,10 +1,12 @@
 const { User } = require('../models');
 
+// Function to handle error responses
 const handleErrorResponse = (res, err) => {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });
 };
 
+// Module exports an object with various controller methods
 module.exports = {
     // Get all users
     async getUsers(req, res) {
@@ -16,7 +18,7 @@ module.exports = {
         }
     },
 
-    // Get a single user
+    // Get a single user by ID
     async getSingleUser(req, res) {
         try {
             const user = await User.findById(req.params.userId).select('-__v');
@@ -31,8 +33,7 @@ module.exports = {
         }
     },
 
-
-    // Create a user
+    // Create a new user
     async createUser(req, res) {
         try {
             const user = await User.create(req.body);
@@ -42,7 +43,7 @@ module.exports = {
         }
     },
 
-    // Delete a user
+    // Delete a user by ID
     async deleteUser(req, res) {
         try {
             const user = await User.findByIdAndDelete(req.params.userId);
@@ -59,8 +60,7 @@ module.exports = {
         }
     },
 
-
-    // Update a user
+    // Update a user by ID
     async updateUser(req, res) {
         try {
             const user = await User.findByIdAndUpdate(
@@ -79,6 +79,7 @@ module.exports = {
         }
     },
 
+    // Add a friend to a user's friend list
     async addFriend(req, res) {
         try {
             const { userId, friendId } = req.params;
@@ -105,6 +106,7 @@ module.exports = {
         }
     },
 
+    // Remove a friend from a user's friend list
     async removeFriend(req, res) {
         try {
             const { userId, friendId } = req.params;
@@ -131,3 +133,4 @@ module.exports = {
         }
     },
 };
+

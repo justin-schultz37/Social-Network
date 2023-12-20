@@ -1,3 +1,4 @@
+// All routes are imported here and then exported to the server
 const router = require('express').Router();
 const apiRoutes = require('./api');
 
